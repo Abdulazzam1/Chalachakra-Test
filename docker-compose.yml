@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql # Volume untuk persistensi data
+ 
+  backend:
+    build: ./backend # Menunjuk ke backend/Dockerfile
+    restart: always
+    ports:
+      - "4000:4000" # Mapping port backend
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+    depends_on:
+      - db # Wajib: Pastikan DB 'up' sebelum backend 'start'
+
+volumes:
+  pgdata: {} # Mendefinisikan volume

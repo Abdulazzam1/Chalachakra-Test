@@ -1,4 +1,4 @@
-const { Task } = require('../models'); // Import model Task
+const { Task } = require('../../models'); // Import model Task
 const { validationResult } = require('express-validator');
 
 // 1. Membuat Task Baru (POST /api/tasks)
