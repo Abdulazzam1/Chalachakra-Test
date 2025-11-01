@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4000/api/tasks';
+const API_URL = '/api/tasks';
 
 const AddTaskForm = ({ onTaskAdded }) => {
   const [title, setTitle] = useState('');

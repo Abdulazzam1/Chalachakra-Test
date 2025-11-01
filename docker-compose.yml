@@ -22,5 +22,12 @@ services:
     depends_on:
       - db # Wajib: Pastikan DB 'up' sebelum backend 'start'
 
+  frontend:
+    build: ./frontend # Menunjuk ke frontend/Dockerfile
+    restart: always
+    ports:
+      - "80:80" # Akses aplikasi utama di http://localhost
+    depends_on:
+      - backend
 volumes:
   pgdata: {} # Mendefinisikan volume

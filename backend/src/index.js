@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 app.use(errorHandler);
 
 // Start server dan koneksi DB
+// ...
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
   try {
@@ -30,5 +31,6 @@ app.listen(PORT, async () => {
     console.log('Database connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
+    process.exit(1); // <-- TAMBAHKAN BARIS INI (Artinya: "Crash!")
   }
 });

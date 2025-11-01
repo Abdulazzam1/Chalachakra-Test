@@ -11,7 +11,7 @@ import Column from './Column';
 import AddTaskForm from './AddTaskForm';
 
 // URL API Backend Anda
-const API_URL = 'http://localhost:4000/api/tasks';
+const API_URL = '/api/tasks';
 
 const Board = () => {
   const [columns, setColumns] = useState({
