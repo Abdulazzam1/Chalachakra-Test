@@ -62,7 +62,7 @@ Catatan: Nilai default di atas sudah diatur untuk berjalan mulus dengan konfigur
 
 - Cukup jalankan satu perintah ini dari root folder proyek:
 
-- docker-compose up --build
+- ```docker-compose up --build```
 
 
 ## Setelah itu:
