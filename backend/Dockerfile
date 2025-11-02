@@ -4,4 +4,4 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 # (Kita akan tambahkan expose port nanti di docker-compose)
-CMD ["node", "src/index.js"]
+CMD ["sh", "-c", "npx sequelize-cli db:migrate && node src/index.js"]

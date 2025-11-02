@@ -7,27 +7,36 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - pgdata:/var/lib/postgresql # Volume untuk persistensi data
+      # PERBAIKAN: Kembalikan ke path yang diinginkan oleh image Postgres modern
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
  
   backend:
-    build: ./backend # Menunjuk ke backend/Dockerfile
+    build: ./backend 
     restart: always
     ports:
-      - "4000:4000" # Mapping port backend
+      - "4000:4000" 
     environment:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
       DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
     depends_on:
-      - db # Wajib: Pastikan DB 'up' sebelum backend 'start'
+      db:
+        condition: service_healthy 
 
   frontend:
-    build: ./frontend # Menunjuk ke frontend/Dockerfile
+    build: ./frontend 
     restart: always
     ports:
-      - "80:80" # Akses aplikasi utama di http://localhost
+      - "80:80" 
     depends_on:
       - backend
+
 volumes:
-  pgdata: {} # Mendefinisikan volume
+  pgdata: {}
